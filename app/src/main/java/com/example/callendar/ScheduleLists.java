@@ -36,8 +36,8 @@ public class ScheduleLists extends AppCompatActivity {
         entryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                entries.add(Integer.toString(position));
-                adapter.notifyDataSetChanged();
+                //entries.add(Integer.toString(position));
+                //adapter.notifyDataSetChanged();
 
                 Intent intent = new Intent(ScheduleLists.this, SingleSchedule.class);
                 intent.putExtra("position",position);
