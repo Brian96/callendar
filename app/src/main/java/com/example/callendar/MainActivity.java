@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
         ((Appointments)this.getApplication()).set_appointment(startList);
 
         final Button btn = (Button) findViewById(R.id.bigButton);
+
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                btn.setText("dfdf");
-                Intent intent = new Intent(MainActivity.this, ScheduleLists.class);
+                Intent intent = new Intent(MainActivity.this, AutoSingleSchedule.class);
                 startActivity(intent);
             }
         });
