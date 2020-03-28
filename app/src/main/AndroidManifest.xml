@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.callendar">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".Appointments"
         android:allowBackup="true"
@@ -15,6 +19,7 @@
         <activity android:name=".Added" />
         <activity android:name=".SingleSchedule" />
         <activity android:name=".ScheduleLists" />
+        <activity android:name=".NLPActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
