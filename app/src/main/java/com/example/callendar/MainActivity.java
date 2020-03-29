@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // add transcription functionality here
         btnStopRecord.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -156,6 +157,14 @@ public class MainActivity extends AppCompatActivity {
                 btnPlay.setEnabled(true);
                 btnRecord.setEnabled(true);
                 btnStop.setEnabled(false);
+                pathSave = getExternalFilesDir(null)+ "/"
+                        +  "test_audio_record.wav";
+                AudioTranscriptor transcriptor = new AudioTranscriptor();
+                try {
+                    final String conversation_transcript = transcriptor.transcript(pathSave);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 

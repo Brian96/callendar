@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: __local_aars__:/Users/yanzhu/Desktop/UofT/Last Year/ECE496/callendar/app/libs/opennlp-tools-1.6.0.jar:unspecified@jar">
+  <library name="Gradle: __local_aars__:./app/libs/opennlp-tools-1.6.0.jar:unspecified@jar">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/app/libs/opennlp-tools-1.6.0.jar!/" />
     </CLASSES>
