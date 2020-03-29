@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.READ_PHONE_STATE},1);
             }
         }else{
-            // do nothing
         }
         // request a run time permisssion
         if (!checkPermissionFromDevice()){
@@ -125,11 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 if (checkPermissionFromDevice()){
 
 
-
+        
                     pathSave = getExternalFilesDir(null)+ "/"
                             +  "test_audio_record.wav";
                     setupMediaRecorder();
                     try{
+                        mediaRecorder.setAudioSamplingRate(48000);
                         mediaRecorder.prepare();
                         mediaRecorder.start();
                     }catch(IOException e){
@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer = new MediaPlayer();
                 try{
                     mediaPlayer.setDataSource(pathSave);
+
                     mediaPlayer.prepare();
                     Toast.makeText(MainActivity.this, "Catch..." + pathSave.toString(),Toast.LENGTH_SHORT).show();
 
@@ -201,6 +202,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
     public  void displayNotification(){
         String message = "This is a notification example.";
 
@@ -314,53 +317,33 @@ public class MainActivity extends AppCompatActivity {
                     events.add(cursor.getString(1));
                 } while (cursor.moveToNext());
             }
-            for (int counter = 0; counter < events.size(); counter++) {
-                Toast.makeText(MainActivity.this, "conflict",Toast.LENGTH_SHORT).show();
 
+            boolean conflict = false;
+            if (events.size() != 0){
+                Toast.makeText(MainActivity.this, "conflicting with "+ events.get(0),Toast.LENGTH_SHORT).show();
+                conflict = true;
             }
-            calBegin = new GregorianCalendar(2020, 1, 06, 19, 00);
-            calEnd = new GregorianCalendar(2020, 1, 06, 20, 00);
 
-            calIntent.setData(CalendarContract.Events.CONTENT_URI);
-            calIntent.setType("vnd.android.cursor.item/event");
-            calIntent.putExtra(CalendarContract.Events.TITLE, "Dinner");
-            calIntent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
-            calIntent.putExtra(CalendarContract.Events.DESCRIPTION, "");
-//        calIntent.putExtra(CalendarContract.Events.RRULE, "FREQ=WEEKLY;COUNT=15;BYDAY=TH");
+            if (!conflict){
+                calBegin = new GregorianCalendar(2020, 1, 06, 19, 00);
+                calEnd = new GregorianCalendar(2020, 1, 06, 20, 00);
 
-//        GregorianCalendar calBegin = new GregorianCalendar(2020, 1, 05, 19, 00);
-//        GregorianCalendar calEnd = new GregorianCalendar(2020, 1, 05, 20, 00);
-            calIntent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
+                calIntent.setData(CalendarContract.Events.CONTENT_URI);
+                calIntent.setType("vnd.android.cursor.item/event");
+                calIntent.putExtra(CalendarContract.Events.TITLE, "Dinner");
+                calIntent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
+                calIntent.putExtra(CalendarContract.Events.DESCRIPTION, "");
+                calIntent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
 
 
-            calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-                    calBegin.getTimeInMillis());
-            calIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
-                    calEnd.getTimeInMillis());
+                calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                        calBegin.getTimeInMillis());
+                calIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+                        calEnd.getTimeInMillis());
 
-            startActivity(calIntent);
+                startActivity(calIntent);
+            }
+
         }
     }
-//        long eventID = 202;
-//        ContentResolver cr = getContentResolver();
-//        ContentValues values = new ContentValues();
-//
-//        values.put(CalendarContract.Attendees.ATTENDEE_NAME,"Tony");
-//        values.put(CalendarContract.Attendees.ATTENDEE_EMAIL,"chedanapro@gmail.com");
-//        values.put(CalendarContract.Attendees.ATTENDEE_RELATIONSHIP,CalendarContract.Attendees.RELATIONSHIP_ATTENDEE);
-//        values.put(CalendarContract.Attendees.ATTENDEE_TYPE,CalendarContract.Attendees.TYPE_OPTIONAL);
-//        values.put(CalendarContract.Attendees.ATTENDEE_STATUS,CalendarContract.Attendees.ATTENDEE_STATUS_INVITED);
-//        values.put(CalendarContract.Attendees.EVENT_ID, eventID);
-
-//        Uri uri = cr.insert(CalendarContract.Attendees.CONTENT_URI, values);
-
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
-//            Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-//            long eventID = Long.parseLong(uri.getLastPathSegment());
-//            Log.i("Calendar", "Event Created, the event id is: " + eventID);
-//            Snackbar.make(view, "Jazzercise event added!", Snackbar.LENGTH_SHORT).show();
-//        } else {
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, MY_PERMISSIONS_REQUEST_WRITE_CALENDAR);
-//        }
-//    }
 }
