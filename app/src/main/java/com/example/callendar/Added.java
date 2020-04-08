@@ -34,13 +34,19 @@ public class Added extends AppCompatActivity {
 
         TextView time_t = (TextView) findViewById(R.id.textView15);
         TextView date_t = (TextView) findViewById(R.id.textView17);
-        TextView event_t = (TextView) findViewById(R.id.textView18);
+        TextView loc_t = (TextView) findViewById(R.id.textView18);
+        TextView person_t = (TextView) findViewById(R.id.textView21);
+        TextView event_t = (TextView) findViewById(R.id.textView22);
         Intent intent = getIntent();
         String time = intent.getStringExtra("time");
         String date = intent.getStringExtra("date");
+        String loc = intent.getStringExtra("loc");
+        String pers = intent.getStringExtra("person");
         String event = intent.getStringExtra("event");
         time_t.setText(time);
         date_t.setText(date);
         event_t.setText(event);
+        loc_t.setText(loc);
+        person_t.setText(pers);
     }
 }
